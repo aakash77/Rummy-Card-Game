@@ -1,0 +1,139 @@
+<html ng-app="Rummy">
+	<head>
+		<meta name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Rummy</title>
+		<!--Bootstrap CSS-->
+		<link rel="stylesheet" type="text/css"
+			href="css/bootstrap/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css"
+			href="css/bootstrap/bootstrap-theme.min.css">
+		<!--Angular-->
+		<script type="text/javascript" src="libs/angular/angular.min.js"></script>
+		<!--Bootstrap-->
+		<script type="text/javascript"
+			src="libs/bootstrap/ui-bootstrap-0.12.0.js"></script>
+		<!--App-->
+		<script type="text/javascript" src="js/app.js"></script>
+		<!--Controllers-->
+		<script type="text/javascript" src="js/controllers/mainController.js"></script>
+		<!--Services-->
+		<script type="text/javascript" src="js/services/dataService.js"></script>
+	</head>
+	<body class="bg-primary">
+		<div ng-controller="MainController as ctrl" class="container" ng-init="ctrl.init()">
+			<div class="row" style="margin-top : 2%;">
+				<button class="btn btn-danger pull-left" ng-click="ctrl.clearDb()">Flush Results</button>
+			</div>
+			<div class="row" style="margin-top : 2%;">
+				<form ng-submit="ctrl.addScore()">
+					<table class="table">
+						<tr>
+							<th>
+								Show					
+							</th>
+							<th>
+								<input type="radio" name="showRadio" value= "papa" ng-model = "show"> Papa 
+							</th>
+							<th>
+								<input type="radio" name="showRadio" value= "mamma" ng-model = "show"> Mamma
+							</th>
+							<th>
+								<input type="radio" name="showRadio" value= "anand" ng-model = "show"> Srushti
+							</th>
+							<th>
+								<input type="radio" name="showRadio" value= "shikha" ng-model = "show"> Anand/Shikha
+							</th>
+							<th>
+								<input type="radio" name="showRadio" value= "aakash" ng-model = "show"> Aakash
+							</th>
+						</tr>
+						<tr>
+							<td>
+								Points
+							</td>
+							<td>
+								<input type="number" class="form-control" min=0 ng-model="pts.papa" ng-disabled ="ctrl.showVal('papa')" required select-on-click>
+							</td>
+							<td>
+								<input type="number" class="form-control" min=0 ng-model="pts.mamma" ng-disabled ="ctrl.showVal('mamma')" required select-on-click>
+							</td>
+							<td>
+								<input type="number" class="form-control" min=0 ng-model="pts.anand" ng-disabled ="ctrl.showVal('anand')" required select-on-click>
+							</td>
+							<td>
+								<input type="number" class="form-control" min=0 ng-model="pts.shikha" ng-disabled ="ctrl.showVal('shikha')" required select-on-click>
+							</td>
+							<td>
+								<input type="number" class="form-control" min=0 ng-model="pts.aakash" ng-disabled ="ctrl.showVal('aakash')" required select-on-click>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Maal
+							</td>
+							<td>
+								<input type="number" class="form-control" min=0 ng-model="maal.papa" required select-on-click>
+							</td>
+							<td>
+								<input type="number" class="form-control" min=0 ng-model="maal.mamma" required select-on-click>
+							</td>
+							<td>
+								<input type="number" class="form-control" min=0 ng-model="maal.anand" required select-on-click>
+							</td>
+							<td>
+								<input type="number" class="form-control" min=0 ng-model="maal.shikha" required select-on-click>
+							</td>
+							<td>
+								<input type="number" class="form-control" min=0 ng-model="maal.aakash" required select-on-click>
+							</td>
+						</tr>
+					</table>
+					<button class="btn btn-success center-block" type="submit">Add</button>	
+				</form>
+			</div>
+			<div class="row" style="margin-top : 2%;">
+				<table class="table table-bordered">
+					<tr>
+						<th>
+							Papa
+						</th>
+						<th>
+							Mamma
+						</th>
+						<th>
+							Srushti
+						</th>
+						<th>
+							Anand/Shikha
+						</th>
+						<th>
+							Aakash
+						</th>
+					</tr>
+					<tr>
+						<td ng-bind="ctrl.getTotal('papa')"></td>
+						<td ng-bind="ctrl.getTotal('mamma')"></td>
+						<td ng-bind="ctrl.getTotal('anand')"></td>
+						<td ng-bind="ctrl.getTotal('shikha')"></td>
+						<td ng-bind="ctrl.getTotal('aakash')"></td>
+					</tr>
+				</table>
+			</div>
+			<div class="row" style="margin-top : 2%;">
+				<table class="table table-bordered">
+					<tr>
+						<th colspan="{{names.length}}">POINTS</th>
+					</tr>
+					<tr ng-repeat="score in scores | reverse">
+						<td>{{score.papa}}</td>
+						<td>{{score.mamma}}</td>
+						<td>{{score.anand}}</td>
+						<td>{{score.shikha}}</td>
+						<td>{{score.aakash}}</td>
+					</tr>					
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
